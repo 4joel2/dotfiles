@@ -1,0 +1,81 @@
+## Copyright (C) 2020-2022 Aditya Shakya <adi1090x@gmail.com>
+## Everyone is permitted to copy and distribute copies of this file under GNU-GPL3
+
+## Configuration for Alacritty, the GPU enhanced terminal emulator.
+## It's a very basic and simple config file, for full configuration...
+## See, /usr/share/doc/alacritty/example/alacritty.yml
+## Import files (Colors, Fonts, Etc)
+import:
+  - ~/.config/alacritty/colors.yml
+  - ~/.config/alacritty/fonts.yml
+
+## Set environment variables
+env:
+  TERM: alacritty
+  WINIT_X11_SCALE_FACTOR: '1.0'
+
+## Terminal window settings
+window:
+  dimensions:
+    columns: 82
+    lines: 24
+
+  padding:
+    x: 12
+    y: 12
+
+  decorations: full
+  startup_mode: Windowed
+  dynamic_title: true
+
+  ## scrolling
+  history: 10000
+  multiplier: 3
+
+  ## Background opacity
+  opacity: 0.8
+
+## Cursor
+cursor:
+  style:
+    shape: Block
+    blinking: On
+
+  unfocused_hollow: false
+
+## Live config reload
+live_config_reload: true
+colors:
+  name: Garuda (dr460nized)
+  author: dr460nf1r3
+  primary:
+    background: '0x0a1124'
+    foreground: '0xeec49a'
+  cursor:
+    text: '0x0a1124'
+    cursor: '0xeec49a'
+  normal:
+    black: '0x0a1124'
+    red: '0x5F4149'
+    green: '0xEB3247'
+    yellow: '0xBC4349'
+    blue: '0xF35645'
+    magenta: '0xF6A73B'
+    cyan: '0xFAD32F'
+    white: '0xeec49a'
+  bright:
+    black: '0xa6896b'
+    red: '0x5F4149'
+    green: '0xEB3247'
+    yellow: '0xBC4349'
+    blue: '0xF35645'
+    magenta: '0xF6A73B'
+    cyan: '0xFAD32F'
+    white: '0xeec49a'
+theme: Garuda.dr460nized
+
+## Shell
+#shell:
+#  program: /bin/zsh
+#  args:
+#    - --login
