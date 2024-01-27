@@ -80,11 +80,9 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='nvim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -116,7 +114,7 @@ rehash_precmd() {
 add-zsh-hook -Uz precmd rehash_precmd
 
 # omz
-alias zshconfig="geany ~/.zshrc"
+alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="thunar ~/.oh-my-zsh"
 
 
@@ -132,7 +130,9 @@ alias tmco='tmux new 'nvim ~/Dokumente/Programmieren/.''
 alias co='nvim ~/Dokumente/Programmieren/.'
 alias vim='nvim'
 alias idea='_JAVA_AWT_WM_NONREPARENTING=1 idea'
-#
+if [ -x "$(command -v neofetch)" ]; then
+  neofetch
+fi
 # git
 alias gcl='git clone --depth 1'
 alias gi='git init'
