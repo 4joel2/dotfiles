@@ -1,3 +1,2 @@
-# dotfiles
-dotfiles
-nvim fehlt, muss manuell via nvchad gebaut werden.
+# dotfiles 
+meine sehr bescheidenen dotfiles für Arch Linux
