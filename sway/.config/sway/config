@@ -28,8 +28,8 @@ input * {
        xkb_layout "de"
 }
 
-output HDMI-A-1  bg ~/.config/sway/wallpapers/nord_lake.png fill
-output DVI-D-1 bg ~/.config/sway/wallpapers/nord_scenary.png fill
+output HDMI-A-1  bg ~/.config/sway/nord_lake.png fill
+output DVI-D-1 bg ~/.config/sway/wp9911800-mountain-anime-wallpapers.jpg fill
 
 output HDMI-A-2 resolution 1920x1080 pos -1920 0
 output HDMI-A-1 resolution 1920x1080 pos -1920 0
