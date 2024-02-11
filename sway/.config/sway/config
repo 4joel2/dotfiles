@@ -4,13 +4,12 @@
 #
 # Read `man 5 sway` for a complete reference.
 font pango: Sauce Code Pro Nerd Font 14
-default_border pixel 5
-hide_edge_borders smart
+default_border pixel 2
+client.focused "#ffffff" "#ffffff" "#ffffff" "#ffffff"
+#default_border color 2
 ### Variables
-
 gaps inner 20
 gaps outer 5
-
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
@@ -28,9 +27,8 @@ input * {
        xkb_layout "de"
 }
 
-output HDMI-A-1  bg ~/.config/sway/wallpapers/nord_lake.png fill
-output DVI-D-1 bg ~/.config/sway/wallpapers/11159642.jpg fill
-
+output HDMI-A-1  bg ~/.config/sway/wallpapers/darkmountain.jpg fill
+output DVI-D-1 bg ~/.config/sway/wallpapers/shisui.jpg fill
 output HDMI-A-2 resolution 1920x1080 pos -1920 0
 output HDMI-A-1 resolution 1920x1080 pos -1920 0
 output DVI-D-1 resolution 1920x1080@144hz pos 0 0
@@ -87,8 +85,6 @@ bindsym $mod+m move workspace to output left
 
     bindsym $mod+c exec $code
 
-    default_border none
-    default_floating_border none
 
 # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
