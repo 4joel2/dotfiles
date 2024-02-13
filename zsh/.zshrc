@@ -25,7 +25,6 @@ ZSH_THEME="darkblood"
 zstyle ':omz:update' mode disabled  # disable automatic updates
 # zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
 # Uncomment the following line to change how often to auto-update (in days).
 # zstyle ':omz:update' frequency 13
 
@@ -117,7 +116,6 @@ add-zsh-hook -Uz precmd rehash_precmd
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="thunar ~/.oh-my-zsh"
 
-
 #mpvpaper -p -f -o --loop --no-audio DVI-D-1 ~/Videos/LW Mandalorian.mp4
 # ls
 alias l='ls -al'
@@ -131,7 +129,7 @@ alias co='nvim ~/Dokumente/Programmieren/.'
 alias vim='nvim'
 alias idea='_JAVA_AWT_WM_NONREPARENTING=1 idea'
 if [ -x "$(command -v neofetch)" ]; then
-  neofetch
+  neofetch --ascii ~/Bilder/ascii.txt
 fi
 # git
 alias gcl='git clone --depth 1'

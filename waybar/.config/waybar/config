@@ -5,9 +5,9 @@
     // "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media", "custom/power"],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "cpu", "disk", "memory", "sway/language", "clock", "tray"],
+    "modules-right": ["pulseaudio", "cpu", "disk", "memory", "clock", "custom/power"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "custom/media", "custom/power"],
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -45,7 +45,7 @@
         },
      "custom/power":{
          "format":"",
-     "on-click":"swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Suspend' 'swaymsg exec systemctl suspend' -b 'shutdown' 'systemctl shutdown'"
+     "on-click":"swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Suspend' 'swaymsg exec systemctl suspend' -b 'shutdown' 'systemctl shutdown'",
      },
 
     "mpd": {

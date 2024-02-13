@@ -14,5 +14,5 @@ family = "Jetbrains Mono Nerd Font"
 style = "Italic"
 
 [font.normal]
-family = "Jetbrains Mono Nerd Font"
+family = "CascadiaCode Nerd Font"
 style = "Regular"
