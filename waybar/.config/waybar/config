@@ -1,0 +1,40 @@
+{
+    // General Settings
+    "layer": "top",
+    "margin-bottom": 1,
+    "margin-left": 1,
+    "margin-right": 1,
+    "margin-top": 1,
+    "spacing": 10,
+
+    // Load Modules
+    "include": [
+        "/home/joel/.config/waybar/modules.json"
+    ],
+
+    // Modules Left
+    "modules-left": [
+        "hyprland/workspaces",
+    ],
+
+    // Modules Center
+    "modules-center": [
+        "clock"
+    ],
+
+    // Modules Right    
+    "modules-right": [
+        "custom/playerprevious",
+        "custom/playerpause",
+        "custom/playernext",
+        "pulseaudio",
+        "bluetooth",
+        "network",
+        "cpu",
+        "memory",
+        "disk",
+        "battery",
+        "custom/exit"
+    ]
+}
+

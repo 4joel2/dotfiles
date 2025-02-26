@@ -1,0 +1,57 @@
+/* -----------------------------------------------------
+ * Import Pywal colors
+ * ----------------------------------------------------- */
+/* @import 'style-light.css'; */
+@define-color backgroundlight #FFFFFF;
+@define-color backgrounddark #FFFFFF;
+@define-color workspacesbackground1 #FFFFFF;
+@define-color workspacesbackground2 #CCCCCC;
+@define-color bordercolor #35D6E7;
+@define-color textcolor1 #FFFFFF;
+@define-color textcolor2 #FFFFFF;
+@define-color textcolor3 #FFFFFF;
+@define-color iconcolor #FFFFFF;
+@define-color backend1 #080809;
+
+/* -----------------------------------------------------
+ * General
+ * ----------------------------------------------------- */
+
+* {
+    font-family: "Fira Sans Semibold", "Font Awesome 6 Free", FontAwesome, awesomefont, Roboto, Helvetica, Arial, "fontawesome-free-6.6.0", sans-serif;
+    border: none;
+    border-radius: 0px;
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 1);
+    margin: 0px 0 0 0;
+    border-radius: 5px 5px;
+    color: @textcolor1;
+}
+
+#workspaces button.active {
+    color: #87CEFA;
+    border-radius: 8px;
+    transition: all 0.1s ease-in-out;
+}
+
+#clock, #battery, #network, #pulseaudio, #bluetooth {
+    color: #c95f8b;
+}
+#memory, #disk, #cpu {
+    color: #73024d;
+} 
+#custom-exit {
+    padding: 8px;
+    color: #87CEFA;
+}
+
+#custom-playerpause {
+    color: #DE2214;
+}
+
+#custom-playerprevious, #custom-playernext {
+    color: #44DE34;
+}
+
