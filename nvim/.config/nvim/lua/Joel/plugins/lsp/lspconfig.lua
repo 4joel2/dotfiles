@@ -3,7 +3,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
         "hrsh7th/cmp-nvim-lsp",
-        -- "saghen/blink.cmp",
+        "saghen/blink.cmp",
         { "antosha417/nvim-lsp-file-operations", config = true },
         { "folke/neodev.nvim",                   opts = {} },
     },
@@ -88,30 +88,28 @@ return {
         -- HACK: If using Blink.cmp Configure all LSPs here
         -- disabled cuz blink has no tailwind support
 
-        -- ( comment the ones in mason )
-        -- local lspconfig = require("lspconfig")
-        -- local capabilities = require("blink.cmp").get_lsp_capabilities() -- Import capabilities from blink.cmp
+         local lspconfig = require("lspconfig")
+         local capabilities = require("blink.cmp").get_lsp_capabilities() -- Import capabilities from blink.cmp
 
-        -- Configure lua_ls
-        -- lspconfig.lua_ls.setup({
-        --     capabilities = capabilities,
-        --     settings = {
-        --         Lua = {
-        --             diagnostics = {
-        --                 globals = { "vim" },
-        --             },
-        --             completion = {
-        --                 callSnippet = "Replace",
-        --             },
-        --             workspace = {
-        --                 library = {
-        --                     [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-        --                     [vim.fn.stdpath("config") .. "/lua"] = true,
-        --                 },
-        --             },
-        --         },
-        --     },
-        -- })
+         lspconfig.lua_ls.setup({
+             capabilities = capabilities,
+             settings = {
+                 Lua = {
+                     diagnostics = {
+                         globals = { "vim" },
+                     },
+                     completion = {
+                         callSnippet = "Replace",
+                     },
+                     workspace = {
+                         library = {
+                             [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                             [vim.fn.stdpath("config") .. "/lua"] = true,
+                         },
+                     },
+                 },
+             },
+         })
         --
         -- -- Configure tsserver (TypeScript and JavaScript)
         -- lspconfig.ts_ls.setup({
