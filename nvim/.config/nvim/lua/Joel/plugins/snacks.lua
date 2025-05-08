@@ -128,7 +128,7 @@ return {
                     { section = "startup" },
                     {
                         section = "terminal",
-                        cmd = "ascii-image-converter ~/Desktop/Others/profiles.JPG -C -c",
+                        cmd = "ascii-image-converter ~/Bilder/wp6600604-serial-experiments-lain-wallpapers.jpg",
                         random = 10,
                         pane = 2,
                         indent = 4,
