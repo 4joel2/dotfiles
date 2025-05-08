@@ -24,15 +24,13 @@
 
     // Modules Right    
     "modules-right": [
-        "custom/playerprevious",
-        "custom/playerpause",
-        "custom/playernext",
         "pulseaudio",
         "bluetooth",
         "network",
         "cpu",
         "memory",
         "disk",
+        "power-profiles-daemon",
         "battery",
         "custom/exit"
     ]

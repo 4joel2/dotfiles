@@ -4,25 +4,22 @@
 // | |  | | (_) | (_| | |_| | |  __/\__ \ 
 // |_|  |_|\___/ \__,_|\__,_|_|\___||___/ 
 //                                        
-//  
-// by Stephan Raabe (2023) 
-// Edited by Pilk (2024) :3c
 // ----------------------------------------------------- 
-//
+
 {
     // Workspaces
     "hyprland/workspaces" : {
         "on-click": "activate",
         "active-only": false,
         "all-outputs": true,
-        "format": "|{}|",
+        "format": "{}",
         "format-icons": {
 			"urgent": "",
 			"active": "",
 			"default": ""
         },
         "persistent-workspaces": {
-             "*": 5
+             "*": 4
         }       
     },
 
@@ -57,6 +54,18 @@
         "separate-outputs": true
 
 
+    },
+    // Power Modules 
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+      "tooltip": true,
+      "format-icons": {
+        "default": "",
+        "performance": "",
+        "balanced": "",
+        "power-saver": ""
+      }
     },
     
     // Wallpaper
@@ -103,8 +112,8 @@
 
     // Clock
     "clock": {
-        "format": "{:%H:%M}",
-        "format-alt": "{:%R %a %d %b}",
+        "format": "{:%R %a %d %b}",
+        "format-alt": "{:%H:%M}",
         "tooltip": false
     },
 
