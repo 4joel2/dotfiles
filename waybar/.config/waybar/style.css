@@ -1,57 +1,79 @@
-/* -----------------------------------------------------
- * Import Pywal colors
- * ----------------------------------------------------- */
-/* @import 'style-light.css'; */
-@define-color backgroundlight #FFFFFF;
-@define-color backgrounddark #FFFFFF;
-@define-color workspacesbackground1 #FFFFFF;
-@define-color workspacesbackground2 #CCCCCC;
-@define-color bordercolor #35D6E7;
-@define-color textcolor1 #FFFFFF;
-@define-color textcolor2 #FFFFFF;
-@define-color textcolor3 #FFFFFF;
-@define-color iconcolor #FFFFFF;
-@define-color backend1 #080809;
-
-/* -----------------------------------------------------
- * General
- * ----------------------------------------------------- */
+@define-color backgroundlight #1d2021;
+@define-color backgrounddark #121212;
+@define-color workspacesbackground1 #3c3836;
+@define-color workspacesbackground2 #504945;
+@define-color bordercolor #fabd2f;
+@define-color textcolor1 #ebdbb2;
+@define-color textcolor2 #d5c4a1;
+@define-color textcolor3 #bdae93;
+@define-color iconcolor #ebdbb2;
+@define-color backend1 #121212;
 
 * {
     font-family: "Fira Sans Semibold", "Font Awesome 6 Free", FontAwesome, awesomefont, Roboto, Helvetica, Arial, "fontawesome-free-6.6.0", sans-serif;
+    font-size: 12px;
     border: none;
     border-radius: 0px;
+    padding: 0;
+    margin: 0;
 }
 
 window#waybar {
-    background-color: rgba(0, 0, 0, 1);
-    margin: 0px 0 0 0;
-    border-radius: 5px 5px;
+    background-color: rgba(18, 18, 18, 0.98); /* Nearly black */
+    margin: 0;
+    padding: 2px 6px;
+    border-radius: 5px;
     color: @textcolor1;
+    min-height: 0;
+}
+
+/* Workspaces */
+#workspaces {
+    background: transparent;
+    margin: 0 4px;
+}
+
+#workspaces button {
+    background-color: #3c3836;
+    color: #ebdbb2;
+    padding: 2px 6px;
+    margin: 1px 2px;
+    border-radius: 4px;
+}
+
+#workspaces button:hover {
+    background-color: #504945;
+    color: #ffffff;
 }
 
 #workspaces button.active {
-    color: #87CEFA;
-    border-radius: 8px;
-    transition: all 0.1s ease-in-out;
+    background-color: #fabd2f;
+    color: #282828;
+    font-weight: bold;
 }
 
-#clock, #battery, #network, #pulseaudio, #bluetooth {
-    color: #c95f8b;
+/* Modules */
+#clock, #battery, #network, #pulseaudio, #bluetooth,
+#memory, #disk, #cpu,
+#custom-exit, #custom-playerpause, #custom-playerprevious, #custom-playernext {
+    padding: 2px 6px;
+    margin: 0 2px;
+}
+
+/* Specific Module Colors */
+#clock, #network, #pulseaudio, #bluetooth {
+    color: #458588;
+}
+#battery {
+    color: #98971a;
 }
 #memory, #disk, #cpu {
-    color: #73024d;
-} 
-#custom-exit {
-    padding: 8px;
-    color: #87CEFA;
+    color: #d65d0e;
 }
-
-#custom-playerpause {
-    color: #DE2214;
+#custom-exit, #custom-playerpause {
+    color: #cc241d;
 }
-
 #custom-playerprevious, #custom-playernext {
-    color: #44DE34;
+    color: #98971a;
 }
 
