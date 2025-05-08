@@ -153,7 +153,10 @@ _fzf_comprun() {
  alias ll="eza --color=always --long --git --icons=always -a"
  alias z="zathura --fork"
  alias ös="ls"
+ alias sl="ls"
+ alias sqlmap="~/Dokumente/hacking/programs/sqlmap-dev/sqlmap.py"
  nerdfetch
 export PATH=$HOME/.local/bin:$PATH
 
 export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
+export PATH="$HOME/Dokumente/hacking/programs:$PATH"
