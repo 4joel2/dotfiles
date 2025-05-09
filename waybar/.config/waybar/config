@@ -29,6 +29,7 @@
         "network",
         "cpu",
         "memory",
+        "diskhome",
         "disk",
         "power-profiles-daemon",
         "battery",
