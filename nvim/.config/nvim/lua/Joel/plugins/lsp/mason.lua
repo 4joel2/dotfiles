@@ -28,7 +28,6 @@ return {
         mason_lspconfig.setup({
             ensure_installed = {
                 "lua_ls",
-                "gopls",
                 "clangd",
             },
         })
@@ -38,7 +37,6 @@ return {
                 "stylua",
                 "pylint",
                 "clangd",
-                "gopls",
             },
         })
 
