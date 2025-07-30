@@ -16,6 +16,13 @@ return {
         "nvim-treesitter/nvim-treesitter",
         "onsails/lspkind.nvim", -- vs-code pictograms
         "roobert/tailwindcss-colorizer-cmp.nvim",
+        {
+            "zbirenbaum/copilot-cmp",
+            dependencies = "copilot.lua",
+            config = function()
+                require("copilot_cmp").setup()
+            end,
+        },
     },
     config = function()
         local cmp = require("cmp")
@@ -29,31 +36,33 @@ return {
         end
 
         local lsp_kinds = {
-            Class = ' ',
-            Color = ' ',
-            Constant = ' ',
-            Constructor = ' ',
-            Enum = ' ',
-            EnumMember = ' ',
-            Event = ' ',
-            Field = ' ',
-            File = ' ',
-            Folder = ' ',
-            Function = ' ',
-            Interface = ' ',
-            Keyword = ' ',
-            Method = ' ',
-            Module = ' ',
-            Operator = ' ',
-            Property = ' ',
-            Reference = ' ',
-            Snippet = ' ',
-            Struct = ' ',
-            Text = ' ',
-            TypeParameter = ' ',
-            Unit = ' ',
-            Value = ' ',
-            Variable = ' ',
+            Class = ' ',
+            Color = ' ',
+            Constant = ' ',
+            Constructor = ' ',
+            Enum = ' ',
+            EnumMember = ' ',
+            Event = ' ',
+            Field = ' ',
+            File = ' ',
+            Folder = ' ',
+            Function = ' ',
+            Interface = ' ',
+            Keyword = ' ',
+            Method = ' ',
+            Module = ' ',
+            Operator = ' ',
+            Property = ' ',
+            Reference = ' ',
+            Snippet = ' ',
+            Struct = ' ',
+            Text = ' ',
+            TypeParameter = ' ',
+            Unit = ' ',
+            Value = ' ',
+            Variable = ' ',
+            -- Copilot Icon hinzugefügt
+            Copilot = ' ',
         }
         -- Returns the current column number.
         local column = function()
@@ -229,21 +238,13 @@ return {
             },
             -- autocompletion sources
             sources = cmp.config.sources({
+                { name = "copilot", group_index = 2 }, -- Copilot-Vorschläge
                 { name = "luasnip" }, -- snippets
                 { name = "nvim_lsp"},
                 { name = "buffer" }, -- text within current buffer
                 { name = "path" }, -- file system paths
                 { name = "tailwindcss-colorizer-cmp" },
             }),
-            -- mapping = cmp.mapping.preset.insert({
-            --     ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
-            --     ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
-            --     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-            --     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-            --     ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
-            --     ["<C-e>"] = cmp.mapping.abort(), -- close completion window
-            --     ["<CR>"] = cmp.mapping.confirm({ select = false }),
-            -- }),
 
             -- NOTE: ! Experimenting with Customized Mappings ! --
             mapping = cmp.mapping.preset.insert({
@@ -307,20 +308,25 @@ return {
             -- setup lspkind for vscode pictograms in autocompletion dropdown menu
             formatting = {
                 format = function(entry, vim_item)
-                    -- Add custom lsp_kinds icons
-                    vim_item.kind = string.format('%s %s', lsp_kinds[vim_item.kind] or '', vim_item.kind)
+                    -- Spezielle Behandlung für Copilot
+                    if entry.source.name == "copilot" then
+                        vim_item.kind = " Copilot"
+                        vim_item.kind_hl_group = "CmpItemKindCopilot"
+                    else
+                        vim_item.kind = string.format('%s %s', lsp_kinds[vim_item.kind] or '', vim_item.kind)
+                    end
 
-
-                    -- add menu tags (e.g., [Buffer], [LSP])
+                    -- Menu-Tags
                     vim_item.menu = ({
                         buffer = "[Buffer]",
                         nvim_lsp = "[LSP]",
                         luasnip = "[LuaSnip]",
                         nvim_lua = "[Lua]",
                         latex_symbols = "[LaTeX]",
+                        copilot = "[Copilot]",
                     })[entry.source.name]
 
-                    -- use lspkind and tailwindcss-colorizer-cmp for additional formatting
+                    -- Lspkind und Colorizer
                     vim_item = lspkind.cmp_format({
                         maxwidth = 30,
                         ellipsis_char = "...",
@@ -332,15 +338,26 @@ return {
 
                     return vim_item
                 end,
-                -- format = lspkind.cmp_format({
-                --         maxwidth = 30,
-                --         ellipsis_char = "...",
-                --         before = require("tailwindcss-colorizer-cmp").formatter
-                -- }),
-                -- format = require("tailwindcss-colorizer-cmp").formatter
+            },
+            -- Sortierung anpassen um Copilot-Vorschläge zu priorisieren
+            sorting = {
+                priority_weight = 2,
+                comparators = {
+                    require("copilot_cmp.comparators").prioritize,
+                    -- Standard-Comparators
+                    cmp.config.compare.offset,
+                    cmp.config.compare.exact,
+                    cmp.config.compare.score,
+                    cmp.config.compare.recently_used,
+                    cmp.config.compare.locality,
+                    cmp.config.compare.kind,
+                    cmp.config.compare.sort_text,
+                    cmp.config.compare.length,
+                    cmp.config.compare.order,
+                },
             },
         })
-
+        
         -- NOTE: Added Ghost text stuff
         -- Only show ghost text at word boundaries, not inside keywords. Based on idea
         -- from: https://github.com/hrsh7th/nvim-cmp/issues/2035#issuecomment-2347186210
@@ -371,6 +388,9 @@ return {
             callback = toggle_ghost_text,
         })
         -- ! Ghost text stuff ! -- 
+
+        -- Optional: Highlight-Gruppe für Copilot definieren
+        vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 
     end,
 }
