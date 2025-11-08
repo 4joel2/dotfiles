@@ -193,10 +193,8 @@ return {
                 else
                     newText = completion_item.word or completion_item.label or ''
                 end
-        
                 local cursor_col = entry.context.cursor.col
                 local after_line = entry.context.cursor_after_line or ""
-        
                 -- Best-effort check if suffix matches
                 if newText ~= "" and after_line ~= "" then
                     local diff_after = #after_line
