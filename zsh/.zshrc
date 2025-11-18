@@ -1,71 +1,80 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-# --- 1. Antidote & Zephyr Bootstrap ---
+# Set the directory we want to store zinit and plugins
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-# Lade Antidote (installiert via git clone)
-source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+# Download Zinit, if it's not there yet
+if [ ! -d "$ZINIT_HOME" ]; then
+   mkdir -p "$(dirname $ZINIT_HOME)"
+   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 
-# Konfiguriere Zephyr-Module, *bevor* Zephyr geladen wird.
-zstyle ':zephyr:modules' list 'keyboard' 'utility' 'completions'
-# Lade alle Plugins aus der .zsh_plugins.txt Datei
-# Antidote Plugins laden und cachen
-antidote load ${ZDOTDIR:-~}/.zsh_plugins.txt
-source ${ZDOTDIR:-~}/.zsh_plugins.zsh
+# Source/Load zinit
+source "${ZINIT_HOME}/zinit.zsh"
 
-eval "$(oh-my-posh init zsh --config honukai)"
+# Add in Powerlevel10k
+zinit ice depth=1; zinit light romkatv/powerlevel10k
 
-# --- 4. PATH & FZF Umgebung ---
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
 
-export PATH=$HOME/.local/bin:$HOME/Dokumente/hacking/programs:$PATH
+# Add in snippets
+zinit snippet OMZL::git.zsh
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::archlinux
+zinit snippet OMZP::aws
+zinit snippet OMZP::kubectl
+zinit snippet OMZP::kubectx
+zinit snippet OMZP::command-not-found
 
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
-export FZF_CTRL_ALT_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+# Load completions
+autoload -Uz compinit && compinit
 
-show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
-export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
-export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+zinit cdreplay -q
 
-# --- 5. Aliase ---
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-alias zshconfig="vim ~/.zshrc"
-alias vim="nvim"
-alias vi="nvim"
-alias v="nvim"
-alias gc="git commit -m"
-alias gp="git push"
-alias ls="eza --color=always --long --git --no-filesize --icons=always --no-time --no-user --no-permissions"
-alias cat="bat"
-alias ll="eza --color=always --long --git --icons=always -a"
-alias z="zathura --fork"
-alias ös="ls"
-alias sl="ls"
-alias sqlmap="~/Dokumente/hacking/programs/sqlmap-dev/sqlmap.py"
-alias ff='nvim $(fzf -m --preview="bat --color=always {}")'
+# Keybindings
+bindkey -e
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
+bindkey '^[w' kill-region
 
-# --- 6. Lazy-Loading Funktionen ---
-# Alle Einrückungen mit normalen Leerzeichen korrigiert
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt hist_ignore_space
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
-autoload -U add-zsh-hook
+# Completion styling
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' menu no
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
+zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
-# Lazy FZF Initialisierung
-_lazy_fzf_init() {
-    add-zsh-hook -d precmd _lazy_fzf_init
-    eval "$(fzf --zsh)"
-}
-add-zsh-hook precmd _lazy_fzf_init
+# Aliases
+alias ls='ls --color'
+alias vim='nvim'
+alias c='clear'
 
-# Lazy-load fzf-git.sh
-_lazy_fzf_git() {
-    add-zsh-hook -d precmd _lazy_fzf_git
-    source ~/fzf-git.sh/fzf-git.sh
-}
-add-zsh-hook precmd _lazy_fzf_git
-
-# Lazy Conda Initialisierung
-start_conda() {
-    source ~/miniconda3/etc/profile.d/conda.sh
-    conda activate base
-}
-alias conda-init='source ~/miniconda3/etc/profile.d/conda.sh'
-
-echo -ne '\e[2 q'
+# Shell integrations
+eval "$(fzf --zsh)"
+eval "$(zoxide init --cmd cd zsh)"
