@@ -11,7 +11,6 @@ return {
         local mason = require("mason")
         local mason_lspconfig = require("mason-lspconfig")
         local mason_tool_installer = require("mason-tool-installer")
-        local lspconfig = require("lspconfig")
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
         local capabilities = cmp_nvim_lsp.default_capabilities()
 
@@ -64,7 +63,8 @@ return {
 
         for server, opts in pairs(servers) do
             opts.capabilities = capabilities
-            lspconfig[server].setup(opts)
+            vim.lsp.config(server, opts)
+            vim.lsp.enable({ server })
         end
     end,
 }

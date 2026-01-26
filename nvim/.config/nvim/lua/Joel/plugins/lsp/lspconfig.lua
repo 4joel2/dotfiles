@@ -88,10 +88,9 @@ return {
         -- HACK: If using Blink.cmp Configure all LSPs here
         -- disabled cuz blink has no tailwind support
 
-         local lspconfig = require("lspconfig")
          local capabilities = require("blink.cmp").get_lsp_capabilities() -- Import capabilities from blink.cmp
 
-         lspconfig.lua_ls.setup({
+         vim.lsp.config("lua_ls", {
              capabilities = capabilities,
              settings = {
                  Lua = {
@@ -110,12 +109,13 @@ return {
                  },
              },
          })
+         vim.lsp.enable({ "lua_ls" })
         --
         -- -- Configure tsserver (TypeScript and JavaScript)
-        -- lspconfig.ts_ls.setup({
+        -- vim.lsp.config("ts_ls", {
         --     capabilities = capabilities,
         --     root_dir = function(fname)
-        --         local util = lspconfig.util
+        --         local util = vim.lsp.util
         --         return not util.root_pattern('deno.json', 'deno.jsonc')(fname)
         --             and util.root_pattern('tsconfig.json', 'package.json', 'jsconfig.json', '.git')(fname)
         --     end,
@@ -131,10 +131,14 @@ return {
         --         },
         --     },
         -- })
+        -- vim.lsp.enable({ "ts_ls" })
 
         -- Add other LSP servers as needed, e.g., gopls, eslint, html, etc.
-        -- lspconfig.gopls.setup({ capabilities = capabilities })
-        -- lspconfig.html.setup({ capabilities = capabilities })
-        -- lspconfig.cssls.setup({ capabilities = capabilities })
+        -- vim.lsp.config("gopls", { capabilities = capabilities })
+        -- vim.lsp.enable({ "gopls" })
+        -- vim.lsp.config("html", { capabilities = capabilities })
+        -- vim.lsp.enable({ "html" })
+        -- vim.lsp.config("cssls", { capabilities = capabilities })
+        -- vim.lsp.enable({ "cssls" })
     end,
 }
