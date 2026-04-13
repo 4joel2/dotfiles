@@ -100,3 +100,4 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 export PATH=$PATH:$HOME/go/bin
 export PATH="$HOME/.local/bin:$PATH"
+# Setzt den Cursor beim Start auf Block (nicht blinkend: 2, blinkend: 1)
