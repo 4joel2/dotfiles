@@ -1,53 +1,67 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		branch = "master",
-		event = { "BufReadPre", "BufNewFile" },
+		lazy = false,
 		build = ":TSUpdate",
 		config = function()
-			-- import nvim-treesitter plugin
-			local treesitter = require("nvim-treesitter.configs")
+			-- In nvim 0.12+ with the new nvim-treesitter rewrite:
+			-- 1. nvim-treesitter.configs is gone.
+			-- 2. Highlighting, folding, and indent are handled by Neovim core or via different APIs.
+			-- 3. ensure_installed is replaced by require('nvim-treesitter').install()
 
-			-- configure treesitter
-			treesitter.setup({ -- enable syntax highlighting
-				highlight = {
-					enable = true,
-				},
-				-- enable indentation
-				indent = { enable = true },
+			local treesitter = require("nvim-treesitter")
 
-				-- ensure these languages parsers are installed
-				ensure_installed = {
-					"json",
-					"javascript",
-					"go",
-					"yaml",
-					"html",
-					"css",
-					"python",
-					"http",
-					"markdown",
-					"markdown_inline",
-					"bash",
-					"lua",
-					"vim",
-					"dockerfile",
-					"gitignore",
-					"vimdoc",
-					"c",
-					"cpp",
-					"java",
-					"rust",
-				},
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "<C-space>",
-						node_incremental = "<C-space>",
-						scope_incremental = false,
-					},
-				},
-				additional_vim_regex_highlighting = false,
+			-- Configure installation (optional if defaults are okay)
+			treesitter.setup({
+				-- install_dir = vim.fn.stdpath("data") .. "/site",
+			})
+
+			-- Ensure parsers are installed (replacing ensure_installed)
+			treesitter.install({
+				"json",
+				"javascript",
+				"go",
+				"yaml",
+				"html",
+				"css",
+				"python",
+				"http",
+				"markdown",
+				"markdown_inline",
+				"bash",
+				"lua",
+				"vim",
+				"dockerfile",
+				"gitignore",
+				"vimdoc",
+				"c",
+				"cpp",
+				"java",
+				"rust",
+			})
+
+			-- Enable treesitter features via autocommand (New way for nvim 0.12+)
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function()
+					local ft = vim.bo.filetype
+					if ft == "" or ft == "snacks_dashboard" or ft == "alpha" or ft == "dashboard" then
+						return
+					end
+
+					local lang = vim.treesitter.language.get_lang(ft) or ft
+					-- In 0.12.2, get_parser returns nil for missing parsers, but start() asserts it.
+					local ok, parser = pcall(vim.treesitter.get_parser, 0, lang)
+					if ok and parser then
+						vim.treesitter.start(0, lang)
+
+						-- Enable indentation provided by nvim-treesitter
+						vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+
+						-- Enable folding provided by Neovim core
+						vim.wo.foldmethod = "expr"
+						vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+					end
+				end,
 			})
 		end,
 	},

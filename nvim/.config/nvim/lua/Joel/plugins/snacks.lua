@@ -110,7 +110,7 @@ return {
 				},
 			},
 			image = {
-				enabled = true,
+				enabled = false,
 				doc = {
 					float = false,
 					inline = true, -- if you want show image on cursor hover

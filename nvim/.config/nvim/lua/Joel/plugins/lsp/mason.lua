@@ -11,8 +11,6 @@ return {
         local mason = require("mason")
         local mason_lspconfig = require("mason-lspconfig")
         local mason_tool_installer = require("mason-tool-installer")
-        local cmp_nvim_lsp = require("cmp_nvim_lsp")
-        local capabilities = cmp_nvim_lsp.default_capabilities()
 
         mason.setup({
             ui = {
@@ -38,34 +36,6 @@ return {
                 "clangd",
             },
         })
-
-
-
-
-        -- Set up each server
-        local servers = {
-            lua_ls = {
-                settings = {
-                    Lua = {
-                        diagnostics = { globals = { "vim" } },
-                        workspace = {
-                            library = {
-                                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                                [vim.fn.stdpath("config") .. "/lua"] = true,
-                            },
-                        },
-                    },
-                },
-            },
-            gopls = {},
-            clangd = {},
-        }
-
-        for server, opts in pairs(servers) do
-            opts.capabilities = capabilities
-            vim.lsp.config(server, opts)
-            vim.lsp.enable({ server })
-        end
     end,
 }
 
