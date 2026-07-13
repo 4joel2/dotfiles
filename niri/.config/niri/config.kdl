@@ -132,7 +132,7 @@ environment {
   ELECTRON_OZONE_PLATFORM_HINT "auto"
   QT_QPA_PLATFORMTHEME "gtk3"
   QT_QPA_PLATFORMTHEME_QT6 "gtk3"
-  TERMINAL "alacritty"
+  TERMINAL "ghostty"
 }
 hotkey-overlay {
     skip-at-startup
@@ -249,7 +249,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // === Application Launchers ===
-    Mod+Return hotkey-overlay-title="Open Terminal" { spawn "alacritty"; }
+    Mod+Return hotkey-overlay-title="Open Terminal" { spawn "ghostty"; }
     Mod+Shift+B hotkey-overlay-title="Open Firefox" { spawn "firefox";  }
     Mod+D hotkey-overlay-title="Application Launcher" {
         spawn "dms" "ipc" "call" "spotlight" "toggle";
