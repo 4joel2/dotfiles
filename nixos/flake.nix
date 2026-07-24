@@ -22,7 +22,10 @@
       url = "github:lukasl-dev/pi.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
+    # Stable Herdr release. Updates are controlled through flake.lock.
+    herdr.url = "github:ogulcancelik/herdr/v0.7.5";
+
     helium-browser = {
       url = "github:oxcl/nix-flake-helium-browser";
       inputs.nixpkgs.follows = "nixpkgs";

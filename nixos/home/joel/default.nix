@@ -62,6 +62,8 @@
     bat
     neovim
     vesktop
+
+    inputs.herdr.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   programs.git = {
