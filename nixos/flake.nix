@@ -26,6 +26,8 @@
     # Stable Herdr release. Updates are controlled through flake.lock.
     herdr.url = "github:ogulcancelik/herdr/v0.7.5";
 
+    nixvim.url = "github:nix-community/nixvim";
+
     helium-browser = {
       url = "github:oxcl/nix-flake-helium-browser";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -5,6 +5,7 @@
     ./zsh.nix
     ./mango.nix
     ./ghostty.nix
+    ./nvim.nix
     ./ssh.nix
     inputs.noctalia.homeModules.default
     inputs.pi.homeModules.default
@@ -60,7 +61,6 @@
     tree
     eza
     bat
-    neovim
     vesktop
 
     inputs.herdr.packages.${pkgs.stdenv.hostPlatform.system}.default
