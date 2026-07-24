@@ -1,1 +1,17 @@
 niri/.config/niri/dms
+
+# Nix build outputs
+result
+result-*
+.direnv/
+
+# Local environment and unencrypted secrets
+.env
+.env.*
+secrets/
+*.key
+id_ed25519
+id_rsa
+
+# Home Manager backup files
+*.hm-backup
