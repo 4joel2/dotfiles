@@ -1,4 +1,5 @@
 niri/.config/niri/dms
+nvim-bak/
 
 # Nix build outputs
 result
