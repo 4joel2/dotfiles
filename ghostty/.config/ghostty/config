@@ -1,12 +1,12 @@
 # Font Configuration
-font-family = Maple Mono NF
+font-family = Jetbrains Mono Nerd Font
 font-size = 20
 
 # Window Configuration
 window-decoration = false
 window-padding-x = 12
 window-padding-y = 12
-background-opacity = 0.9
+background-opacity = 1
 background-blur = true
 
 # Cursor Configuration
@@ -47,4 +47,4 @@ keybind = shift+enter=text:\n
 gtk-single-instance = true
 
 # Color theme
-theme = Rose Pine
+theme = Solarized 
