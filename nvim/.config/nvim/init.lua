@@ -138,5 +138,22 @@ vim.keymap.set("n", "<leader>lx", function()
 	})
 end, { desc = "Toggle LSP diagnostics" })
 
+local function transparent_background()
+	for _, group in ipairs({ "Normal", "NormalNC", "SignColumn", "FoldColumn", "EndOfBuffer", "MsgArea" }) do
+		vim.api.nvim_set_hl(0, group, { bg = "NONE" })
+	end
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+	group = vim.api.nvim_create_augroup("transparent-background", { clear = true }),
+	callback = transparent_background,
+})
+
+vim.cmd.colorscheme("bark")
+transparent_background()
+
 require("plugins")
+require("statusline").setup()
+require("treesitter")
+require("terminal").setup()
 require("lsp")

@@ -38,4 +38,4 @@ vim.lsp.config("*", {
 	capabilities = require("mini.completion").get_lsp_capabilities(),
 })
 
-vim.lsp.enable({ "lua_ls", "gopls", "clangd" })
+vim.lsp.enable({ "lua_ls", "gopls", "clangd", "texlab" })
